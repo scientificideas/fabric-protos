@@ -64,6 +64,9 @@ message Metadata {
 message MetadataSignature {
     bytes signature_header = 1; // An encoded SignatureHeader
     bytes signature = 2;       // The signature over the concatenation of the Metadata value bytes, signatureHeader, and block header
+    uint64 signer_id = 3;
+    bytes nonce = 4;
+    bytes auxiliary_input = 5;
 }
 
 message Header {
