@@ -1,10 +1,6 @@
-/*
-
-Copyright IBM Corp. All Rights Reserved.
-
-SPDX-License-Identifier: Apache-2.0
-
-*/
+// Copyright the Hyperledger Fabric contributors. All rights reserved.
+//
+// SPDX-License-Identifier: Apache-2.0
 
 syntax = "proto3";
 
@@ -67,4 +63,7 @@ message Options {
     Rotation leader_rotation = 17;
 
     uint64 decisions_per_leader = 18;
+
+    uint64 request_max_bytes = 19;
+    uint64 request_pool_submit_timeout = 20;
 }

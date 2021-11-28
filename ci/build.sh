@@ -10,7 +10,7 @@ branch="${1:-master}"
 # Lint the protocol buffers
 prototool lint
 
-[ -d build/fabric-protos-go/.git ] || git clone https://github.com/hyperledger/fabric-protos-go.git build/fabric-protos-go
+[ -d build/fabric-protos-go/.git ] || git clone https://github.com/SmartBFT-Go/fabric-protos-go.git build/fabric-protos-go
 
 # Checkout the appropriate branch and remove generated files
 (
