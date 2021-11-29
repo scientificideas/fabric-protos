@@ -65,5 +65,5 @@ message Options {
     uint64 decisions_per_leader = 18;
 
     uint64 request_max_bytes = 19;
-    uint64 request_pool_submit_timeout = 20;
+    string request_pool_submit_timeout = 20;
 }
