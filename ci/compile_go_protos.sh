@@ -14,6 +14,6 @@ if [ ! -d "$repo" ]; then
 fi
 
 for protos in $(find . -name '*.proto' -exec dirname {} \; | sort -u); do
-  protoc "--go_out=plugins=grpc,paths=source_relative:$repo" "$protos"/*.proto
+  protoc --go_out=$repo --go_opt=paths=source_relative --go-grpc_out=require_unimplemented_servers=false:$repo --go-grpc_opt=paths=source_relative "$protos"/*.proto
 done
 
