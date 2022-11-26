@@ -41,7 +41,7 @@ service Gateway {
     rpc Submit(SubmitRequest) returns (SubmitResponse);
 
     // The CommitStatus service will indicate whether a prepared transaction previously submitted to
-    // the Submit sevice has been committed. It will wait for the commit to occur if it hasn’t already
+    // the Submit service has been committed. It will wait for the commit to occur if it hasn’t already
     // committed.
     rpc CommitStatus(SignedCommitStatusRequest) returns (CommitStatusResponse);
 
@@ -73,12 +73,9 @@ message EndorseRequest {
 
 // EndorseResponse returns the result of endorsing a transaction.
 message EndorseResponse {
-    // The response that is returned by the transaction function, as defined
-    // in peer/proposal_response.proto.
-    protos.Response result = 1;
     // The unsigned set of transaction responses from the endorsing peers for signing by the client
     // before submitting to ordering service (via gateway).
-    common.Envelope prepared_transaction = 2;
+    common.Envelope prepared_transaction = 1;
 }
 
 // SubmitRequest contains the details required to submit a transaction (update the ledger).
@@ -163,6 +160,10 @@ message ChaincodeEventsRequest {
     bytes identity = 3;
     // Position within the ledger at which to start reading events.
     orderer.SeekPosition start_position = 4;
+    // Only returns events after this transaction ID. Transactions up to and including this one should be ignored. This
+    // is used to allow resume of event listening from a certain position within a start block specified by
+    // start_position.
+    string after_transaction_id = 5;
 }
 
 // ChaincodeEventsResponse returns chaincode events emitted from a specific block.
@@ -206,7 +207,4 @@ message PreparedTransaction {
     string transaction_id = 1;
     // The transaction envelope.
     common.Envelope envelope = 2;
-    // The response that is returned by the transaction function during endorsement, as defined
-    // in peer/proposal_response.proto
-    protos.Response result = 3;
 }
